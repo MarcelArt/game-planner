@@ -11,8 +11,19 @@ async function read(): Promise<Game[]> {
 	return games;
 }
 
+async function update(id: string, input: GameInput) {
+	return await db.execute('UPDATE games SET title = $1, description = $2, picture = $3 WHERE id = $4', [input.title, input.description, input.picture, id]);
+}
+
+async function getById(id: string): Promise<Game> {
+	const game = await db.select<Game[]>('SELECT id, title, description, picture FROM games where id = $1', [id]);
+    return game[0];
+}
+
 const gameData = {
-    create,
+	create,
 	read,
+	update,
+	getById,
 };
 export default gameData;

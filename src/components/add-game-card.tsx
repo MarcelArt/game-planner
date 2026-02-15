@@ -10,6 +10,7 @@ import { Field, FieldError, FieldLabel } from './ui/field';
 import { Popover, PopoverContent, PopoverHeader, PopoverTitle, PopoverTrigger } from './ui/popover';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import gameData from '@/data/game.data';
+import { toast } from 'sonner';
 
 export function AddGameCard() {
 	const queryClient = useQueryClient();
@@ -19,6 +20,7 @@ export function AddGameCard() {
 			queryClient.invalidateQueries({
 				queryKey: ['games'],
 			});
+			toast.success('Game added');
 		}
 	});
 

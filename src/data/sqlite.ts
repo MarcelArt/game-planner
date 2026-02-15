@@ -9,12 +9,15 @@ async function connectDb() {
 
 async function select<T>(query: string, bindValues?: Array<string | number | boolean>): Promise<T> {
     const db = await connectDb();
-    return await db.select<T>(query, bindValues);
+    const res = await db.select<T>(query, bindValues);
+    db.close();
+    return res;
 }
 
 async function execute(query: string, bindValues?: Array<string | number | boolean>) {
     const db = await connectDb();
     const res = await db.execute(query, bindValues);
+    db.close();
     return res;
 }
 
