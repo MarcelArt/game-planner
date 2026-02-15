@@ -59,7 +59,7 @@ export default function Header() {
 
           {/* Demo Links Start */}
 
-          <Link
+          {/* <Link
             to="/demo/form/simple"
             onClick={() => setIsOpen(false)}
             className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
@@ -109,7 +109,7 @@ export default function Header() {
           >
             <Network size={20} />
             <span className="font-medium">TanStack Query</span>
-          </Link>
+          </Link> */}
 
           {/* Demo Links End */}
         </nav>
