@@ -1,5 +1,4 @@
 import { createFileRoute } from '@tanstack/react-router';
-import logo from '../logo.svg';
 import { useQuery } from '@tanstack/react-query';
 import gameData from '@/data/game.data';
 import { CardImage } from '@/components/card-image';
@@ -19,8 +18,6 @@ function App() {
 	});
 
 	if (status !== 'success') return null;
-
-	console.log('data :>> ', data);
 
 	return (
 		<div className="m-4 grid grid-cols-4 gap-4">
