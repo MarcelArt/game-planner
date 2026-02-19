@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 interface BreadcrumbPath {
-	link: string;
+	link?: string;
 	text: string;
 }
 

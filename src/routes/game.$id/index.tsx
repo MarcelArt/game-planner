@@ -28,7 +28,7 @@ function RouteComponent() {
 	const { setPaths } = useBreadcrumb();
 
 	useEffect(() => {
-		setPaths([{ link: '/', text: data.title }]);
+		setPaths([{ text: data.title }]);
 	}, [data])
 
 	const { mutate } = useMutation({
