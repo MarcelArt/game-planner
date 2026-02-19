@@ -25,7 +25,7 @@ function RouteComponent() {
 							{paths.map((p, i) => {
 								return (
 									<Fragment key={i}>
-										{i >= 0 ? <BreadcrumbSeparator className="hidden md:block" /> : null}
+										{i > 0 ? <BreadcrumbSeparator className="hidden md:block" /> : null}
 										<BreadcrumbItem className="hidden md:block">
 											<BreadcrumbLink href={p.link}>{p.text}</BreadcrumbLink>
 										</BreadcrumbItem>

@@ -29,7 +29,7 @@ function RouteComponent() {
 
 	useEffect(() => {
 		setPaths([{ link: '/', text: data.title }]);
-	}, [])
+	}, [data])
 
 	const { mutate } = useMutation({
 		mutationFn: (input: GameInput) => gameData.update(id, input),
