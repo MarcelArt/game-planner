@@ -4,9 +4,11 @@ import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import gameData from '@/data/game.data';
+import useBreadcrumb from '@/hooks/use-breadcrumb';
 import { useForm } from '@tanstack/react-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
+import { useEffect } from 'react';
 import { toast } from 'sonner';
 
 export const Route = createFileRoute('/game/$id/')({
@@ -23,6 +25,11 @@ function RouteComponent() {
 	const { id } = Route.useParams();
   const { data } = Route.useLoaderData();
   const queryClient = useQueryClient();
+	const { setPaths } = useBreadcrumb();
+
+	useEffect(() => {
+		setPaths([{ link: '/', text: data.title }]);
+	}, [])
 
 	const { mutate } = useMutation({
 		mutationFn: (input: GameInput) => gameData.update(id, input),
