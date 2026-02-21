@@ -15,55 +15,57 @@ import {
 } from '@/components/ui/sidebar';
 import { useParams } from '@tanstack/react-router';
 
-// This is sample data.
-const data = {
-	navMain: [
-		{
-			title: 'Master Data',
-			url: '#',
-			items: [
-				{
-					title: 'Game',
-					url: '#',
-				},
-				{
-					title: 'Items',
-					url: '#',
-				},
-				{
-					title: 'Recipes',
-					url: '#',
-				},
-			],
-		},
-		{
-			title: 'Planning',
-			url: '#',
-			items: [
-				{
-					title: 'Plans',
-					url: '#',
-				},
-				{
-					title: 'Inventories',
-					url: '#',
-				},
-				{
-					title: 'Notes',
-					url: '#',
-				},
-			],
-		},
-	],
-};
-
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { id } = useParams({ from: '/game/$id' });
+	const { id } = useParams({ from: '/game/$id' });
+	const gameUrl = `/game/${id}`;
+
+	const data = {
+		navMain: [
+			{
+				title: 'Master Data',
+				url: '#',
+				items: [
+					{
+						title: 'Game',
+						url: '/',
+					},
+					{
+						title: 'Items',
+						url: '/items',
+					},
+					{
+						title: 'Recipes',
+						url: '#',
+					},
+				],
+			},
+			{
+				title: 'Planning',
+				url: '#',
+				items: [
+					{
+						title: 'Plans',
+						url: '#',
+					},
+					{
+						title: 'Inventories',
+						url: '#',
+					},
+					{
+						title: 'Notes',
+						url: '#',
+					},
+				],
+			},
+		],
+	};
+
+	const joinUrl = (path: string) => `${gameUrl}${path}`;
 
 	return (
 		<Sidebar {...props}>
 			<SidebarHeader>
-				<GameSwitcher gameId={id}/>
+				<GameSwitcher gameId={id} />
 				{/* <SearchForm /> */}
 			</SidebarHeader>
 			<SidebarContent>
@@ -76,7 +78,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 								{item.items.map((item) => (
 									<SidebarMenuItem key={item.title}>
 										<SidebarMenuButton asChild>
-											<a href={item.url}>{item.title}</a>
+											<a href={joinUrl(item.url)}>{item.title}</a>
 										</SidebarMenuButton>
 									</SidebarMenuItem>
 								))}
