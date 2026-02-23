@@ -1,12 +1,7 @@
-import { Column } from '@/components/column';
+import { CreateItemDialog } from '@/components/create-item-dialog';
 import { ItemComponent } from '@/components/item-component';
 import { Row } from '@/components/row';
-import { Spacer } from '@/components/spacer';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Item, ItemContent, ItemGroup, ItemHeader, ItemTitle } from '@/components/ui/item';
-import { Label } from '@/components/ui/label';
+import { ItemGroup } from '@/components/ui/item';
 import gameData from '@/data/game.data';
 import itemData from '@/data/item.data';
 import useBreadcrumb from '@/hooks/use-breadcrumb';
@@ -42,39 +37,7 @@ function RouteComponent() {
 		<div className='m-4 space-6'>
 			<Row mainAxisAlignment='between' crossAxisAlignment='stretch'>
 				<h2 className='scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0'>Items</h2>
-				<Dialog>
-					<DialogTrigger asChild>
-						<Button variant='default'>Add Item</Button>
-					</DialogTrigger>
-					<DialogContent>
-						<DialogHeader>
-							<DialogTitle>Add New Item</DialogTitle>
-							<DialogDescription>Add new item to this game. Click save when you are done</DialogDescription>
-							<Row className='gap-6' mainAxisAlignment='between' crossAxisAlignment='stretch'>
-								<Item variant='outline' className='shrink-0'>
-									<ItemHeader>
-										<img src='https://minecraft.wiki/images/Coal_JE4_BE3.png?165e9' alt='Coal' className='aspect-square w-full rounded-sm object-cover' />
-									</ItemHeader>
-									<ItemContent>
-										<ItemTitle>Coal</ItemTitle>
-									</ItemContent>
-								</Item>
-								<Column className='gap-4' crossAxisAlignment='start'>
-									<Column className='gap-2' crossAxisAlignment='start'>
-										<Label>Name</Label>
-										<Input placeholder='Name' />
-									</Column>
-									<Column className='gap-2' crossAxisAlignment='start'>
-										<Label>Picture</Label>
-										<Input placeholder='Picture URL' />
-									</Column>
-                  <Spacer/>
-									<Button className='self-end'>Save</Button>
-								</Column>
-							</Row>
-						</DialogHeader>
-					</DialogContent>
-				</Dialog>
+				<CreateItemDialog gameId={id}/>
 			</Row>
 			<div className='flex w-full max-w-fit flex-col gap-6 mt-4'>
 				<ItemGroup className='grid grid-cols-10 gap-4'>
