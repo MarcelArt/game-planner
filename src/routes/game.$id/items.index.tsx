@@ -42,7 +42,7 @@ function RouteComponent() {
 			<div className='flex w-full max-w-fit flex-col gap-6 mt-4'>
 				<ItemGroup className='grid grid-cols-10 gap-4'>
 					{items.map((item) => (
-						<ItemComponent key={item.id} name={item.name} picture={item.picture} />
+						<ItemComponent key={item.id} name={item.name} picture={item.picture} gameId={item.game_id} id={item.id} />
 					))}
 				</ItemGroup>
 			</div>

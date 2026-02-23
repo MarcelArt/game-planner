@@ -10,8 +10,13 @@ async function read(gameId: string): Promise<Item[]> {
     return await db.select<Item[]>('SELECT id, name, picture, game_id FROM items where game_id = $1', [gameId]);
 }
 
+async function update(id: string, input: ItemInput) {
+	return await db.execute('UPDATE items SET name = $1, picture = $2 WHERE id = $3', [input.name, input.picture, id]);
+}
+
 const itemData = {
     create,
     read,
+    update,
 };
 export default itemData;
