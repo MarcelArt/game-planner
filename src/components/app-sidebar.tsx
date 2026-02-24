@@ -49,7 +49,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 					},
 					{
 						title: 'Inventories',
-						url: '#',
+						url: '/inventories',
 					},
 					{
 						title: 'Notes',

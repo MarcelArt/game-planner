@@ -84,6 +84,19 @@ pub fn run() {
             );",
             kind: MigrationKind::Up,
         },
+        Migration {
+            version: 7,
+            description: "create_v_inventories_view",
+            sql: "CREATE VIEW v_inventories AS 
+                SELECT 
+                    i.*,
+                    coalesce(i2.amount, 0) amount,
+                    i2.id inventory_id
+                from items i 
+                left join inventories i2 on i.id = i2.item_id 
+            ;",
+            kind: MigrationKind::Up,
+        }
     ];
 
     tauri::Builder::default()

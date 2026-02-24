@@ -14,6 +14,13 @@ async function update(id: string, input: ItemInput) {
 	return await db.execute('UPDATE items SET name = $1, picture = $2 WHERE id = $3', [input.name, input.picture, id]);
 }
 
+// SELECT 
+// 	i.*,
+// 	coalesce(i2.amount, 0) amount
+// from items i 
+// left join inventories i2 on i.id = i2.item_id 
+// where i.game_id = '4a3ae9d2-6c55-4cd4-91dd-3c5eb83ac3ea'
+
 const itemData = {
     create,
     read,
