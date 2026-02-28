@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GameIdRouteImport } from './routes/game.$id'
 import { Route as GameIdIndexRouteImport } from './routes/game.$id/index'
+import { Route as GameIdRecipesIndexRouteImport } from './routes/game.$id/recipes.index'
 import { Route as GameIdItemsIndexRouteImport } from './routes/game.$id/items.index'
 import { Route as GameIdInventoriesIndexRouteImport } from './routes/game.$id/inventories.index'
 
@@ -28,6 +29,11 @@ const GameIdRoute = GameIdRouteImport.update({
 const GameIdIndexRoute = GameIdIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => GameIdRoute,
+} as any)
+const GameIdRecipesIndexRoute = GameIdRecipesIndexRouteImport.update({
+  id: '/recipes/',
+  path: '/recipes/',
   getParentRoute: () => GameIdRoute,
 } as any)
 const GameIdItemsIndexRoute = GameIdItemsIndexRouteImport.update({
@@ -47,12 +53,14 @@ export interface FileRoutesByFullPath {
   '/game/$id/': typeof GameIdIndexRoute
   '/game/$id/inventories/': typeof GameIdInventoriesIndexRoute
   '/game/$id/items/': typeof GameIdItemsIndexRoute
+  '/game/$id/recipes/': typeof GameIdRecipesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/game/$id': typeof GameIdIndexRoute
   '/game/$id/inventories': typeof GameIdInventoriesIndexRoute
   '/game/$id/items': typeof GameIdItemsIndexRoute
+  '/game/$id/recipes': typeof GameIdRecipesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -61,6 +69,7 @@ export interface FileRoutesById {
   '/game/$id/': typeof GameIdIndexRoute
   '/game/$id/inventories/': typeof GameIdInventoriesIndexRoute
   '/game/$id/items/': typeof GameIdItemsIndexRoute
+  '/game/$id/recipes/': typeof GameIdRecipesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -70,8 +79,14 @@ export interface FileRouteTypes {
     | '/game/$id/'
     | '/game/$id/inventories/'
     | '/game/$id/items/'
+    | '/game/$id/recipes/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/game/$id' | '/game/$id/inventories' | '/game/$id/items'
+  to:
+    | '/'
+    | '/game/$id'
+    | '/game/$id/inventories'
+    | '/game/$id/items'
+    | '/game/$id/recipes'
   id:
     | '__root__'
     | '/'
@@ -79,6 +94,7 @@ export interface FileRouteTypes {
     | '/game/$id/'
     | '/game/$id/inventories/'
     | '/game/$id/items/'
+    | '/game/$id/recipes/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -109,6 +125,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GameIdIndexRouteImport
       parentRoute: typeof GameIdRoute
     }
+    '/game/$id/recipes/': {
+      id: '/game/$id/recipes/'
+      path: '/recipes'
+      fullPath: '/game/$id/recipes/'
+      preLoaderRoute: typeof GameIdRecipesIndexRouteImport
+      parentRoute: typeof GameIdRoute
+    }
     '/game/$id/items/': {
       id: '/game/$id/items/'
       path: '/items'
@@ -130,12 +153,14 @@ interface GameIdRouteChildren {
   GameIdIndexRoute: typeof GameIdIndexRoute
   GameIdInventoriesIndexRoute: typeof GameIdInventoriesIndexRoute
   GameIdItemsIndexRoute: typeof GameIdItemsIndexRoute
+  GameIdRecipesIndexRoute: typeof GameIdRecipesIndexRoute
 }
 
 const GameIdRouteChildren: GameIdRouteChildren = {
   GameIdIndexRoute: GameIdIndexRoute,
   GameIdInventoriesIndexRoute: GameIdInventoriesIndexRoute,
   GameIdItemsIndexRoute: GameIdItemsIndexRoute,
+  GameIdRecipesIndexRoute: GameIdRecipesIndexRoute,
 }
 
 const GameIdRouteWithChildren =

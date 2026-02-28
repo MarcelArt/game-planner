@@ -35,7 +35,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 					},
 					{
 						title: 'Recipes',
-						url: '#',
+						url: '/recipes',
 					},
 				],
 			},
