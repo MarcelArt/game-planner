@@ -96,7 +96,31 @@ pub fn run() {
                 left join inventories i2 on i.id = i2.item_id 
             ;",
             kind: MigrationKind::Up,
-        }
+        },
+        Migration {
+            version: 8,
+            description: "create_v_recipes_view",
+            sql: "CREATE VIEW v_recipes AS 
+                select 
+                    r.id as id,
+                    r.output_amount as output_amount,
+                    r.item_id as output_id,
+                    o.name as output_item,
+                    o.picture as output_picture,
+                    rd.id as recipe_detail_id,
+                    rd.input_amount as input_amount,
+                    rd.item_id as input_id,
+                    i.name as input_item,
+                    i.picture as input_picture,
+                    g.id as game_id
+                from recipes r 
+                join recipe_details rd on r.id = rd.recipe_id 
+                join items i on rd.item_id = i.id 
+                join items o on r.item_id = o.id 
+                join games g on o.game_id = g.id 
+            ;",
+            kind: MigrationKind::Up,
+        },
     ];
 
     tauri::Builder::default()
